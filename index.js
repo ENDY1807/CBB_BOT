@@ -6,7 +6,7 @@ const client = new Client({
 });
 
 // ================= CONFIG =================
-const TOKEN = 'MTQ4OTU3MzU0MTI5MTYyNjU4Ng.G0ZVhB.6ZPrFkkpzDL4rYOrWHdR4KbFAO7slcDRrMZQwI';
+const TOKEN = 'MTQ4OTU3MzU0MTI5MTYyNjU4Ng.GK9uVT.sEeR-2iiNX70txgfo-Ja_jsnlolSUGGUcFzdoc';
 const CHANNEL_ID = '1453661050606977239';
 
 const HOST = 'game-gnl-sgp2.raznar.net';
