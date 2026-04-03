@@ -27,7 +27,7 @@ async function checkServer() {
 
     if (lastStatus === false || lastStatus === null) {
       const channel = await client.channels.fetch(CHANNEL_ID);
-      channel.send('🟢 Server Minecraft sekarang **ONLINE!**');
+      channel.send('🟢 Server sedang **ONLINE!**');
     }
 
     lastStatus = true;
@@ -35,7 +35,7 @@ async function checkServer() {
   } catch (err) {
     if (lastStatus === true || lastStatus === null) {
       const channel = await client.channels.fetch(CHANNEL_ID);
-      channel.send('🔴 Server Minecraft sekarang **OFFLINE!**');
+      channel.send('🔴 Server sedang **OFFLINE!**');
     }
 
     lastStatus = false;
