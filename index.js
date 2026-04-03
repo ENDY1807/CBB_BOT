@@ -45,7 +45,6 @@ async function checkServer() {
           .setTitle('🔄 SERVER KEMBALI ONLINE')
           .setDescription(
             `Server Minecraft telah kembali **ONLINE** setelah beberapa saat tidak dapat diakses.\n\n` +
-            `👥 Player: **${status.players.online}/${status.players.max}**\n\n` +
             `Server sudah bisa dimainkan kembali 🚀`
           )
           .setColor('Yellow')
