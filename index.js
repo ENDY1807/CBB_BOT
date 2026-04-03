@@ -9,7 +9,7 @@ const client = new Client({
 const TOKEN = 'MTQ4OTU3MzU0MTI5MTYyNjU4Ng.G0ZVhB.6ZPrFkkpzDL4rYOrWHdR4KbFAO7slcDRrMZQwI';
 const CHANNEL_ID = '1453661050606977239';
 
-const HOST = 'game-gnl-sgp2.raznar.net:25163';
+const HOST = 'game-gnl-sgp2.raznar.net';
 const PORT = 25163;
 // ==========================================
 
