@@ -14,28 +14,43 @@ const PORT = 25163;
 // ==========================================
 
 let lastStatus = null;
+let lastOfflineTime = null;
 
 client.once('ready', () => {
   console.log(`Bot nyala sebagai ${client.user.tag}`);
-
-  setInterval(checkServer, 10000); // cek tiap 10 detik
+  setInterval(checkServer, 10000);
 });
 
 async function checkServer() {
+  const channel = await client.channels.fetch(CHANNEL_ID);
+
   try {
     const status = await util.status(HOST, PORT);
 
-    if (lastStatus === false || lastStatus === null) {
-      const channel = await client.channels.fetch(CHANNEL_ID);
-      channel.send('🟢 Server sedang **ONLINE!**');
+    // Kalau sebelumnya OFFLINE
+    if (lastStatus === false) {
+      const now = Date.now();
+
+      // cek apakah OFFLINE nya sebentar (<= 1 menit)
+      if (lastOfflineTime && (now - lastOfflineTime <= 60000)) {
+        channel.send('🔄 Server sedang **RESTART!**');
+      } else {
+        channel.send(`🟢 Server ONLINE! Player: ${status.players.online}/${status.players.max}`);
+      }
+    }
+
+    // pertama kali nyala
+    if (lastStatus === null) {
+      channel.send(`🟢 Server ONLINE! Player: ${status.players.online}/${status.players.max}`);
     }
 
     lastStatus = true;
 
   } catch (err) {
-    if (lastStatus === true || lastStatus === null) {
-      const channel = await client.channels.fetch(CHANNEL_ID);
-      channel.send('🔴 Server sedang **OFFLINE!**');
+    // kalau sebelumnya ONLINE → jadi OFFLINE
+    if (lastStatus === true) {
+      lastOfflineTime = Date.now();
+      channel.send('🔴 Server OFFLINE!');
     }
 
     lastStatus = false;
