@@ -71,11 +71,12 @@ async function checkServer() {
     // pertama kali nyala
     if (lastStatus === null) {
       const embed = new EmbedBuilder()
-        .setTitle('🟢 STATUS SERVER')
+        .setTitle('🟢 SERVER ONLINE')
         .setDescription(
-          `Server terdeteksi dalam kondisi **ONLINE**.\n\n` +
-          `👥 Player: **${status.players.online}/${status.players.max}**\n\n` +
-          `Server siap digunakan`
+          `Server CBB sekarang sudah **ONLINE**.\n\n` +
+            `🌐 IP: **${HOST}:${PORT}**\n` +
+            `Player sudah bisa bermain kembali di server` +
+            `Selamat Bermamin 👋`
         )
         .setColor('Green')
         .setTimestamp();
