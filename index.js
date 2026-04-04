@@ -58,9 +58,8 @@ async function checkServer() {
           .setDescription(
             `Server Minecraft sekarang sudah **ONLINE**.\n\n` +
             `🌐 IP: **${HOST}:${PORT}**\n` +
-            `👥 Player Online: **${status.players.online}/${status.players.max}**\n` +
-            `📜 MOTD: **${status.motd.clean}**\n\n` +
-            `Silakan masuk ke dalam server dan mulai bermain 🎮`
+            `Player sudah bisa bermain kembali di server` +
+            `Selamat Bermamin 👋`
           )
           .setColor('Green')
           .setTimestamp();
