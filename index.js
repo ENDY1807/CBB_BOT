@@ -75,8 +75,8 @@ async function checkServer() {
         .setDescription(
           `Server CBB sekarang sudah **ONLINE**.\n\n` +
             `🌐 IP: **${HOST}:${PORT}**\n` +
-            `Player sudah bisa bermain kembali di server` +
-            `Selamat Bermamin 👋`
+            `Player sudah bisa bermain kembali di server\n` +
+            `Selamat Bermain 👋`
         )
         .setColor('Green')
         .setTimestamp();
