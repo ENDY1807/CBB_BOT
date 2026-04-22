@@ -9,8 +9,8 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 const CHANNEL_ID = '1489579354638778428';
 
-const HOST = 'game-gnl-sgp2.raznar.net';
-const PORT = 25163;
+const HOST = 'standardjava2.phantomic.web.id';
+const PORT = 25566;
 // ==========================================
 
 let lastStatus = null;
