@@ -16,11 +16,16 @@ const PORT = 25566;
 let lastStatus = null;
 let lastOfflineTime = null;
 
-// lock ke 1 channel
+// ambil channel
 async function getChannel() {
-  const channel = await client.channels.fetch(CHANNEL_ID);
-  if (!channel || channel.id !== CHANNEL_ID) return null;
-  return channel;
+  try {
+    const channel = await client.channels.fetch(CHANNEL_ID);
+    if (!channel || channel.id !== CHANNEL_ID) return null;
+    return channel;
+  } catch (err) {
+    console.log('Gagal ambil channel:', err);
+    return null;
+  }
 }
 
 client.once('ready', () => {
@@ -33,13 +38,14 @@ async function checkServer() {
   if (!channel) return;
 
   try {
-    const status = await util.status(HOST, PORT);
+    // cek status server (pakai timeout biar gak ngegantung)
+    const status = await util.status(HOST, PORT, { timeout: 5000 });
 
     // ================= ONLINE =================
     if (lastStatus === false) {
       const now = Date.now();
 
-      // restart detect
+      // detect restart
       if (lastOfflineTime && (now - lastOfflineTime <= 60000)) {
         const embed = new EmbedBuilder()
           .setTitle('🔄 SERVER KEMBALI ONLINE')
@@ -58,8 +64,8 @@ async function checkServer() {
           .setDescription(
             `Server Minecraft sekarang sudah **ONLINE**.\n\n` +
             `🌐 IP: **${HOST}:${PORT}**\n` +
-            `Player sudah bisa bermain kembali di server` +
-            `Selamat Bermamin 👋`
+            `Player sudah bisa bermain kembali di server\n` +
+            `Selamat Bermain 👋`
           )
           .setColor('Green')
           .setTimestamp();
@@ -68,15 +74,15 @@ async function checkServer() {
       }
     }
 
-    // pertama kali nyala
+    // pertama kali bot nyala
     if (lastStatus === null) {
       const embed = new EmbedBuilder()
         .setTitle('🟢 SERVER ONLINE')
         .setDescription(
           `Server CBB sekarang sudah **ONLINE**.\n\n` +
-            `🌐 IP: **${HOST}:${PORT}**\n` +
-            `Player sudah bisa bermain kembali di server\n` +
-            `Selamat Bermain 👋`
+          `🌐 IP: **${HOST}:${PORT}**\n` +
+          `Player sudah bisa bermain kembali di server\n` +
+          `Selamat Bermain 👋`
         )
         .setColor('Green')
         .setTimestamp();
@@ -87,6 +93,8 @@ async function checkServer() {
     lastStatus = true;
 
   } catch (err) {
+    console.log('Server check error:', err.message);
+
     // ================= OFFLINE =================
     if (lastStatus === true) {
       lastOfflineTime = Date.now();
